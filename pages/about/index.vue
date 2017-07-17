@@ -2,11 +2,12 @@
   <section class="container">
     <div>
       <aHead/>
+      <button type="button" name="button" @click="changeLanguage">中英文切换</button>
       <h1 class="title">
         NUXT
       </h1>
-      <h2 class="subtitle">
-        这是一个基于NUXT的SSR项目
+      <h2 class="subtitle" v-html="use.home.desc">
+        
       </h2>
     </div>
   </section>
@@ -14,8 +15,24 @@
 
 <script>
 import aHead from '~components/header.vue'
+import language from '~assets/js/language.js'
 
 export default {
+  data () {
+    return {
+      langChina: true
+    }
+  },
+  computed: {
+    use () {
+      return this.langChina === true ? language.chinese : language.english
+    }
+  },
+  methods: {
+    changeLanguage () {
+      this.langChina = !this.langChina;
+    }
+  },
   components: {
     aHead
   }

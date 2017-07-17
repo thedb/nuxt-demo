@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -24,25 +26,37 @@ module.exports = {
     /*
     ** Run ESLINT on save
     */
+    vendor: ['axios','exif-js','jquery'],
     extend (config, ctx) {
       if (ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
-          test: /\.(js|vue)$/,
+          test: /\.(vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
       }
 
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$': 'jquery',
+        'EXIF': 'exif-js'
+      })
+    ]
   },
+  plugins: [
+    // ssr: false to only include it on client-side
+    // { src: '~assets/js/jquery.min.js', ssr: false },
+  ],
   modules: [
-    // '@nuxtjs/axios', 
+    // '@nuxtjs/axios',
     '@nuxtjs/proxy'
- ],
+  ],
   proxy: [
-    ['/api', { 
-      target: 'http://10.146.67.200:3001/api', 
+    ['/api', {
+      // target: 'http://192.168.2.108:3001/api',
+      target: 'http://10.146.66.46:3001/api',
       pathRewrite: { '^/api': '' } }]
   ]
 }

@@ -1,18 +1,20 @@
 <template>
   <section class="container">
     <aHead/>
+    <button type="button" name="button" @click="changeLanguage">中英文切换</button>
     <p v-show="hasNoWork">
-      目前空闲：{{hasNoWork.length == 0 ? '无' : hasNoWork}}
+      {{use.about.about}}:{{hasNoWork.length == 0 ? '无' : hasNoWork}}
     </p>
     <div class="Container">
       <div class="listHead">
-        <span class="headImage">头像</span>
-        <span>姓名</span>
+        <!-- <span class="headImage">头像</span> -->
+        <!-- <span>姓名</span> -->
+        <span>{{use.about.name}}</span>
         <span v-for="(v,k) in workInfo" v-html="workInfo[k].work"></span>
       </div>
       <div class="listContainer">
         <div class="listContent" v-for="(v,k) in userInfo">
-          <span class="headImage"><img style="width:100%" :src="userInfo[k].head_img" alt="" /></span>
+          <!-- <span class="headImage"><img style="width:100%" :src="userInfo[k].head_img" alt="" /></span> -->
           <span v-html="userInfo[k].name"></span>
           <span v-for="(val,key) in showLiST(v.work,workInfo)" :class="{hasWork:val}" >{{ }}</span>
         </div>
@@ -23,6 +25,7 @@
 
 <script>
 import aHead from '~components/header.vue'
+import language from '~assets/js/language.js'
 import $axios from 'axios'
 
 export default {
@@ -30,8 +33,14 @@ export default {
     return {
       userInfo: false,
       workInfo: false,
-      hasNoWork: false
+      hasNoWork: false,
+      langChina: true
     };
+  },
+  computed: {
+    use () {
+      return this.langChina === true ? language.chinese : language.english
+    }
   },
   created () {
     $axios({
@@ -61,6 +70,9 @@ export default {
     });
   },
   methods: {
+    changeLanguage () {
+      this.langChina = !this.langChina;
+    },
     showLiST (work, workInfo) {
       var arr = [].slice.call(workInfo);
       var _work = [].slice.call(work);
@@ -88,9 +100,10 @@ body,html{
 }
 .container{
   width: 100%;
-  padding-top: 300px;
+  padding-top: 26%;
   position: relative;
   display: flex;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -99,8 +112,10 @@ body,html{
   width:100%;
   display: flex;
   flex-direction:row;
-  justify-content:center;
+  justify-content:flex-start;
   margin-bottom: 50px;
+  overflow: hidden;
+  overflow-x: visible;
   span{
     display:inline-block;
     width:120px;
