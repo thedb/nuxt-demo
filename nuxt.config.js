@@ -54,9 +54,20 @@ module.exports = {
     '@nuxtjs/proxy'
   ],
   proxy: [
-    ['/api', {
+    [
+      '/api',
+      {
       // target: 'http://192.168.2.108:3001/api',
-      target: 'http://10.146.66.46:3001/api',
-      pathRewrite: { '^/api': '' } }]
+        target: 'http://10.146.66.46:3001/api',
+        pathRewrite: { '^/api': '' }
+      }
+    ],
+    [
+      '/login',
+      {
+        target: 'http://10.146.66.46:3001/login',
+        pathRewrite: { '^/login': '' }
+      }
+    ]
   ]
 }

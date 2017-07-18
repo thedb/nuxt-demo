@@ -7,7 +7,7 @@
         NUXT
       </h1>
       <h2 class="subtitle" v-html="use.home.desc">
-        
+
       </h2>
     </div>
   </section>
@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 body,html{
   width: 100%;
   height: 100%;

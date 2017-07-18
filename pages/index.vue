@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 body,html{
   width: 100%;
   height: 100%;
@@ -112,7 +112,7 @@ body,html{
   width:100%;
   display: flex;
   flex-direction:row;
-  justify-content:flex-start;
+  justify-content:center;
   margin-bottom: 50px;
   overflow: hidden;
   overflow-x: visible;
